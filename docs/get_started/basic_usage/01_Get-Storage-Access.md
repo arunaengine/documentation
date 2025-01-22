@@ -6,6 +6,8 @@
 The preparation for creating an account in Aruna is minimal. It is only required that you are already registered in a supported AAI. Currently that is: 
 
 * **GWDG SSO Service**, i.e. DFN AAI, Life Science Login (ELIXIR AAI) or GfBio Accounts
+* **Direct LifeScience RI Login**
+
 
 These are also the current options that are offered if you want to register or login via the [Aruna demo website](https://dev.aruna-engine.org/){:target="_blank"}. If you want to register via the Aruna API instead, you just have to put the OIDC token you received from one of the previously mentioned services into the [user registration request header](#user-registration) for authorization.
 
