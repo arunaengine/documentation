@@ -1,8 +1,8 @@
 site_name: Aruna Documentation
-site_url: https://ArunaStorage.github.io/documentation
+site_url: https://docs.aruna-engine.org
 
-repo_name: 'arunastorage/api'
-repo_url: 'https://github.com/ArunaStorage/api'
+repo_name: 'arunaengine/api'
+repo_url: 'https://github.com/arunaengine/api'
 
 docs_dir: docs/
 

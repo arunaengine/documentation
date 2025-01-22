@@ -8,7 +8,7 @@ However, this addition is only relevant if you plan to use one of the gRPC clien
 
 Finally, the next sections deal with the individual resource client services which can also be selected individually in the navigation on the left side.
 
-Please note that we try to make the documentation as complete as possible. Each listed operation is explained with a short description and minimalistic examples for isolated use. If API examples for specific operations are missing, please refer to our full [**:simple-swagger: Aruna REST API Swagger-UI**](https://api.dev.aruna-storage.org/swagger-ui/){:target="_blank"}, which provides a complete overview of the Aruna API endpoints and their matching requests and responses.
+Please note that we try to make the documentation as complete as possible. Each listed operation is explained with a short description and minimalistic examples for isolated use. If API examples for specific operations are missing, please refer to our full [**:simple-swagger: Aruna REST API Swagger-UI**](https://api.dev.aruna-engine.org/swagger-ui/){:target="_blank"}, which provides a complete overview of the Aruna API endpoints and their matching requests and responses.
 
 [**Let's get started :rocket:**](01_Get-Storage-Access.md)
 

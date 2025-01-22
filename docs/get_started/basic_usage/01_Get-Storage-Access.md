@@ -7,7 +7,7 @@ The preparation for creating an account in Aruna is minimal. It is only required
 
 * **GWDG SSO Service**, i.e. DFN AAI, Life Science Login (ELIXIR AAI) or GfBio Accounts
 
-These are also the current options that are offered if you want to register or login via the [Aruna demo website](https://dev.aruna-storage.org/){:target="_blank"}. If you want to register via the Aruna API instead, you just have to put the OIDC token you received from one of the previously mentioned services into the [user registration request header](#user-registration) for authorization.
+These are also the current options that are offered if you want to register or login via the [Aruna demo website](https://dev.aruna-engine.org/){:target="_blank"}. If you want to register via the Aruna API instead, you just have to put the OIDC token you received from one of the previously mentioned services into the [user registration request header](#user-registration) for authorization.
 
 From here on you have two possibilities to authenticate/authorize all of your actions inside Aruna system:
 
@@ -29,9 +29,9 @@ The presence of a client connection to the specific resource service is required
 
     **Please remember that the development instance in no way guarantees data consistency and availability!**
 
-    * JSON-over-HTTP: `https://api.dev.aruna-storage.org` or localized e.g. `https://api.gi.dev.aruna-storage.org`
-    * gRPC Clients: `https://grpc.dev.aruna-storage.org` or localized e.g. `https://grpc.gi.dev.aruna-storage.org`
-    * DataProxies: e.g. `https://proxy.gi.dev.aruna-storage.org`
+    * JSON-over-HTTP: `https://api.dev.aruna-engine.org` or localized e.g. `https://api.gi.dev.aruna-engine.org`
+    * gRPC Clients: `https://grpc.dev.aruna-engine.org` or localized e.g. `https://grpc.gi.dev.aruna-engine.org`
+    * DataProxies: e.g. `https://proxy.gi.dev.aruna-engine.org`
 
     **It is also emphasized that Aruna is a data orchestration engine that orchestrates data and metadata on behalf of multiple storage instances.<br/>
     While we provide some physical storage for our partners, not all storage instances are operated by us.**

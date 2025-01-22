@@ -34,22 +34,22 @@ All data uploaded and stored by users is stored as an Object, represented as a s
 
 ### **API**
 
-[:material-source-repository: **Github repo**](https://github.com/ArunaStorage/api){:target="_blank"}
+[:material-source-repository: **Github repo**](https://github.com/arunaengine/api){:target="_blank"}
 
 > This repo contains the definitions of the Aruna API. It is written in the protocol-buffers interface definition language (IDL). This can be used to automatically generate clients in many different programming languages using the grpc framework.
 
 > With the release of a new API version, the client libraries are automatically compiled and updated to the latest version.
 > The API is fundamentally backwards compatible, which means that users' applications will continue to work as usual before they also decide to move to the new version.
 
-* Rust API stubs: [GitHub](https://github.com/ArunaStorage/rust-api){:target="_blank"} or [crates.io](https://crates.io/crates/aruna-rust-api){:target="_blank"}
-* Go API stubs: [GitHub](https://github.com/ArunaStorage/go-api){:target="_blank"}
-* Python API stubs: [GitHub](https://github.com/ArunaStorage/python-api){:target="_blank"} or [PyPI](https://pypi.org/project/Aruna-Python-API){:target="_blank"}
-* Java API stubs: [GitHub](https://github.com/ArunaStorage/java-api){:target="_blank"} or [GitHub Packages](https://github.com/ArunaStorage/java-api/packages/){:target="_blank"}
+* Rust API stubs: [GitHub](https://github.com/arunaengine/rust-api){:target="_blank"} or [crates.io](https://crates.io/crates/aruna-rust-api){:target="_blank"}
+* Go API stubs: [GitHub](https://github.com/arunaengine/go-api){:target="_blank"}
+* Python API stubs: [GitHub](https://github.com/arunaengine/python-api){:target="_blank"} or [PyPI](https://pypi.org/project/Aruna-Python-API){:target="_blank"}
+* Java API stubs: [GitHub](https://github.com/arunaengine/java-api){:target="_blank"} or [GitHub Packages](https://github.com/arunaengine/java-api/packages/){:target="_blank"}
 
 
 ### **Aruna Data Orchestration Engine**
 
-[:material-source-repository: **Github repo**](https://github.com/ArunaStorage/aruna){:target="_blank"}
+[:material-source-repository: **Github repo**](https://github.com/arunaengine/aruna){:target="_blank"}
 
 The implementation of the Server, that handles the incoming requests, and DataProxy, that handles the communication between the data storage backend and Aruna.
 
@@ -75,7 +75,7 @@ The implementation of the Server, that handles the incoming requests, and DataPr
 <!--
 ### **AOS CLI**
 
-[**Main Aruna CLI repository**](https://github.com/ArunaStorage/ArunaCLI){:target="_blank"}
+[**Main Aruna CLI repository**](https://github.com/arunaengine/cli){:target="_blank"}
 
 > This is a simple CLI application for the ScienceObjectsDB API. 
 > Its currently work in progress and will be developed along with the API. Neither concept nor implementation are final.
@@ -89,5 +89,5 @@ The implementation of the Server, that handles the incoming requests, and DataPr
 - The base API interface is defined using [Protocol Buffers](https://developers.google.com/protocol-buffers)
 - All endpoints work with JSON over HTTP just as they would do with requests made via gRPC from individual clients
 - [Client stubs](#api) will be generated for major programming languages on every API release ([listed here](#api))
-- A [web UI](https://dev.aruna-storage.org) is available for demonstration purposes
+- A [web UI](https://dev.aruna-engine.org) is available for demonstration purposes
 - A CLI client will be offered in the future to simplify the usage entry barrier

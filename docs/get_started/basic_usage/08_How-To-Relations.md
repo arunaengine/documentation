@@ -84,7 +84,7 @@ With freely defined relationship types, resources can be linked to each other as
         "addRelations": [
           {
             "external": {
-              "identifier": "https://dev.aruna-storage.org/objects/<object-id>",
+              "identifier": "https://dev.aruna-engine.org/objects/<object-id>",
               "definedVariant": "EXTERNAL_RELATION_VARIANT_URL",
               "customVariant": ""
             },
@@ -168,7 +168,7 @@ With freely defined relationship types, resources can be linked to each other as
         add_relations: vec![Relation {
             relation: Some(relation::Relation::External(
                              ExternalRelation {
-                               identifier: "https://dev.aruna-storage.org/objects/<object-id>".to_string(),
+                               identifier: "https://dev.aruna-engine.org/objects/<object-id>".to_string(),
                                defined_variant: ExternalRelationVariant::Url as i32,
                                custom_variant: None,
                              }
@@ -256,7 +256,7 @@ With freely defined relationship types, resources can be linked to each other as
         add_relations=[
             Relation(
                 internal=ExternalRelation(
-                    identifier: "https://dev.aruna-storage.org/objects/<object-id>".to_string(),
+                    identifier: "https://dev.aruna-engine.org/objects/<object-id>".to_string(),
                     defined_variant: ExternalRelationVariant.EXTERNAL_RELATION_VARIANT_URL,
                     custom_variant: None,
                 )
