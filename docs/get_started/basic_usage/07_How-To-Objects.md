@@ -398,6 +398,7 @@ For each uploaded part of the multipart upload you will receive a so called `ETa
     
     file_path = "/path/to/local/file"
     headers = {'Content-type': 'application/octet-stream'}  # Arbitrary binary data upload
+    upload_id = None
     completed_parts = []
     
     # Open file and return a stream
@@ -406,6 +407,7 @@ For each uploaded part of the multipart upload you will receive a so called `ETa
             # Create tonic/ArunaAPI request to request an upload url for multipart upload part
             get_request = GetUploadURLRequest(
                 object_id="<object-id>",
+                upload_id=upload_id,
                 multipart=True,
                 part_number=i+1
             )
@@ -413,8 +415,9 @@ For each uploaded part of the multipart upload you will receive a so called `ETa
             # Send the request to the Aruna instance gRPC endpoint
             get_response = client.object_client.GetUploadURL(request=get_request)
 
-            # Extraxt download url from response
+            # Extraxt download url and upload id from response
             upload_url = get_response.url
+            upload_id = get_response.upload_id
 
             # Upload file content chunk to upload url
             upload_response = requests.put(upload_url, data=data_chunk, headers=headers)
@@ -556,15 +559,16 @@ On success the response will contain the finished Object analog to the response 
         content_len=123456
         hashes=[Hash(
             alg=Hashalgorithm.HASHALGORITHM_SHA256,
-            hash="5839942d4f1e706fee33d0837617163f9368274a72b2b7e89d3b0877f390fc33"
+            hash="<file-hash>"
         )],
+        upload_id="<upload-id>",
         completed_parts=[
             CompletedPart(
-                etag="6bcf86bed8807b8e78f0fc6e0a53079d-1",
+                etag="<etag-of-part-1>",
                 part=1
             ),
             CompletedPart(
-                etag="d41d8cd98f00b204e9800998ecf8427e-2",
+                etag="<etag-of-part-1>",
                 part=2
             ),
             CompletedPart( ... )
