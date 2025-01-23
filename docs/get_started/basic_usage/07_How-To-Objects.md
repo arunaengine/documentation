@@ -327,6 +327,8 @@ For each uploaded part of the multipart upload you will receive a so called `ETa
     ```rust linenums="1"
     let mut file = tokio::fs::File::open("/path/to/local/file").await.unwrap();     // File handle
     let mut remaining_bytes: usize = file.metadata().await.unwrap().len() as usize; // File size in bytes
+
+    let mut upload_id = String::new();
     let mut upload_part_counter: i64 = 0; 
     let mut completed_parts: Vec<CompletedPart> = Vec::new();
     
@@ -352,16 +354,19 @@ For each uploaded part of the multipart upload you will receive a so called `ETa
         };
 
         // Create tonic/ArunaAPI request to request an upload url for multipart upload part
-        let upload_url = object_client
-            .get_upload_url(GetUploadUrlRequest {
-                object_id: object_id.to_string(),
-                multipart: true,
-                part_number: upload_part_counter as i32,
-            })
-            .await
-            .unwrap()
-            .into_inner()
-            .url;
+        let response = self.object_client
+                .get_upload_url(GetUploadUrlRequest {
+                    object_id: object_id.to_string(),
+                    upload_id: upload_id.to_string(),
+                    multipart: true,
+                    part_number: upload_part_counter as i32,
+                })
+                .await
+                .unwrap()
+                .into_inner();
+
+        upload_id = response.upload_id;
+        let upload_url = response.url;
 
         // Upload buffer content to upload url and parse ETag from response header
         let client   = reqwest::Client::new();
@@ -514,18 +519,18 @@ On success the response will contain the finished Object analog to the response 
         hashes: vec![
             Hash {
                 alg: Hashalgorithm::Sha256 as i32,
-                hash: "5839942d4f1e706fee33d0837617163f9368274a72b2b7e89d3b0877f390fc33"
-                    .to_string(),
+                hash: "<file-hash>".to_string(),
             },
             // Other additional hashes can be added here
         ],
+        upload_id: "<upload-id>".to_string();
         completed_parts: vec![
             CompletedPart {
-                etag: "6bcf86bed8807b8e78f0fc6e0a53079d-1".to_string(),
+                etag: "<etag-of-part-1>".to_string(),
                 part: 1,
             },
             CompletedPart {
-                etag: "d41d8cd98f00b204e9800998ecf8427e-2".to_string(),
+                etag: "<etag-of-part-2>".to_string(),
                 part: 2,
             },
             CompletedPart { ... }
