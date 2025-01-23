@@ -1482,19 +1482,43 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">OBJECT_ID</span><span class="o">=</span>&lt;staging-object-id&gt;
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">OBJECT_ID</span><span class="o">=</span>&lt;staging-object-id&gt;
 
 <span class="c1"># Loop over all file parts, request an upload url, upload the data and display ETag with its part number</span>
-<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.aa&quot;</span>,1<span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.ab&quot;</span>,2<span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.ac&quot;</span>,3<span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.ad&quot;</span>,4<span class="p">;</span><span class="w"> </span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.aa&quot;</span>,1<span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.ab&quot;</span>,2<span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.ac&quot;</span>,3<span class="w"> </span><span class="s2">&quot;Dummy_Archive.tar.gz.ad&quot;</span>,4<span class="p">;</span>
 <span class="w">  </span><span class="k">do</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1"># Split input at comma</span>
 <span class="w">  </span><span class="nb">set</span><span class="w"> </span>--<span class="w"> </span><span class="nv">$i</span><span class="p">;</span><span class="w">  </span><span class="c1"># Convert the &quot;tuple&quot; into the param args $1 $2 ...</span>
 <span class="w">    </span><span class="nv">PART_FILE</span><span class="o">=</span><span class="nv">$1</span>
 <span class="w">    </span><span class="nv">PART_NUM</span><span class="o">=</span><span class="nv">$2</span>
 
-<span class="w">    </span><span class="nv">UPLOAD_URL</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                         </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                         </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/objects/</span><span class="si">${</span><span class="nv">OBJECT_ID</span><span class="si">}</span><span class="s2">/upload?multipart=true&amp;partNumber=</span><span class="si">${</span><span class="nv">PART_NUM</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.url&#39;</span><span class="k">)</span>
-<span class="w">    </span><span class="nv">ETAG</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>-T<span class="w"> </span><span class="si">${</span><span class="nv">PART_FILE</span><span class="si">}</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">UPLOAD_URL</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>etag<span class="k">)</span>
+<span class="w">    </span><span class="c1"># Fetch upload url for specific part</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="nv">$UPLOAD_ID</span><span class="w"> </span><span class="o">]</span>
+<span class="w">    </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">RESPONSE</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/objects/</span><span class="si">${</span><span class="nv">OBJECT_ID</span><span class="si">}</span><span class="s2">/upload?multipart=true&amp;partNumber=</span><span class="si">${</span><span class="nv">PART_NUM</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nv">RESPONSE</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                        </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/objects/</span><span class="si">${</span><span class="nv">OBJECT_ID</span><span class="si">}</span><span class="s2">/upload?multipart=true&amp;partNumber=</span><span class="si">${</span><span class="nv">PART_NUM</span><span class="si">}</span><span class="s2">&amp;uploadId=</span><span class="si">${</span><span class="nv">UPLOAD_ID</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nv">UPLOAD_URL</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.url&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESPONSE</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">UPLOAD_ID</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.uploadId&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$RESPONSE</span><span class="s2">&quot;</span><span class="k">)</span>
+
+<span class="w">    </span><span class="c1"># Upload file part to upload url and parse etag from response </span>
+<span class="w">    </span><span class="nv">ETAG</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>-T<span class="w"> </span><span class="si">${</span><span class="nv">PART_FILE</span><span class="si">}</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">UPLOAD_URL</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>etag<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f2<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="k">)</span>
 
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\nPart: </span><span class="si">${</span><span class="nv">PART_NUM</span><span class="si">}</span><span class="s2">, ETag: </span><span class="si">${</span><span class="nv">ETAG</span><span class="si">}</span><span class="s2">\n&quot;</span>
 <span class="k">done</span>
@@ -1559,8 +1583,15 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
 <span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
-<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokio</span><span class="p">::</span><span class="n">fs</span><span class="p">::</span><span class="n">File</span><span class="p">::</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/path/to/local/file&quot;</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">     </span><span class="c1">// File handle</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokio</span><span class="p">::</span><span class="n">fs</span><span class="p">::</span><span class="n">File</span><span class="p">::</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/path/to/local/file&quot;</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w">     </span><span class="c1">// File handle</span>
 <span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">remaining_bytes</span><span class="p">:</span><span class="w"> </span><span class="kt">usize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">metadata</span><span class="p">().</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">().</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">usize</span><span class="p">;</span><span class="w"> </span><span class="c1">// File size in bytes</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">upload_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
 <span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">upload_part_counter</span><span class="p">:</span><span class="w"> </span><span class="kt">i64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
 <span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">completed_parts</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">CompletedPart</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Vec</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
 
@@ -1586,16 +1617,19 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="c1">// Create tonic/ArunaAPI request to request an upload url for multipart upload part</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">upload_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object_client</span>
-<span class="w">        </span><span class="p">.</span><span class="n">get_upload_url</span><span class="p">(</span><span class="n">GetUploadUrlRequest</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">object_id</span><span class="p">:</span><span class="w"> </span><span class="nc">object_id</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
-<span class="w">            </span><span class="n">multipart</span><span class="p">:</span><span class="w"> </span><span class="nc">true</span><span class="p">,</span>
-<span class="w">            </span><span class="n">part_number</span><span class="p">:</span><span class="w"> </span><span class="nc">upload_part_counter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span>
-<span class="w">        </span><span class="p">})</span>
-<span class="w">        </span><span class="p">.</span><span class="k">await</span>
-<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="w">        </span><span class="p">.</span><span class="n">into_inner</span><span class="p">()</span>
-<span class="w">        </span><span class="p">.</span><span class="n">url</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">object_client</span>
+<span class="w">            </span><span class="p">.</span><span class="n">get_upload_url</span><span class="p">(</span><span class="n">GetUploadUrlRequest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">object_id</span><span class="p">:</span><span class="w"> </span><span class="nc">object_id</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">upload_id</span><span class="p">:</span><span class="w"> </span><span class="nc">upload_id</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">multipart</span><span class="p">:</span><span class="w"> </span><span class="nc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="n">part_number</span><span class="p">:</span><span class="w"> </span><span class="nc">upload_part_counter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="p">.</span><span class="k">await</span>
+<span class="w">            </span><span class="p">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="n">into_inner</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">upload_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">upload_id</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">upload_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">url</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// Upload buffer content to upload url and parse ETag from response header</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">client</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">reqwest</span><span class="p">::</span><span class="n">Client</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
@@ -1658,10 +1692,14 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">50</span><span class="p">;</span>  <span class="c1"># 50MiB chunks</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">50</span><span class="p">;</span>  <span class="c1"># 50MiB chunks</span>
 
 <span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;/path/to/local/file&quot;</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/octet-stream&#39;</span><span class="p">}</span>  <span class="c1"># Arbitrary binary data upload</span>
+<span class="n">upload_id</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">completed_parts</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Open file and return a stream</span>
@@ -1670,6 +1708,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
         <span class="c1"># Create tonic/ArunaAPI request to request an upload url for multipart upload part</span>
         <span class="n">get_request</span> <span class="o">=</span> <span class="n">GetUploadURLRequest</span><span class="p">(</span>
             <span class="n">object_id</span><span class="o">=</span><span class="s2">&quot;&lt;object-id&gt;&quot;</span><span class="p">,</span>
+            <span class="n">upload_id</span><span class="o">=</span><span class="n">upload_id</span><span class="p">,</span>
             <span class="n">multipart</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">part_number</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
         <span class="p">)</span>
@@ -1677,8 +1716,9 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
         <span class="c1"># Send the request to the Aruna instance gRPC endpoint</span>
         <span class="n">get_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">object_client</span><span class="o">.</span><span class="n">GetUploadURL</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">get_request</span><span class="p">)</span>
 
-        <span class="c1"># Extraxt download url from response</span>
+        <span class="c1"># Extraxt download url and upload id from response</span>
         <span class="n">upload_url</span> <span class="o">=</span> <span class="n">get_response</span><span class="o">.</span><span class="n">url</span>
+        <span class="n">upload_id</span> <span class="o">=</span> <span class="n">get_response</span><span class="o">.</span><span class="n">upload_id</span>
 
         <span class="c1"># Upload file content chunk to upload url</span>
         <span class="n">upload_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">upload_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data_chunk</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
@@ -1780,23 +1820,25 @@ On success the response will contain the finished Object analog to the response 
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Native JSON request to finish a multipart upload Object</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Native JSON request to finish a multipart upload Object</span>
 curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">  {</span>
 <span class="s1">    &quot;contentLen&quot;: &quot;123456&quot;,</span>
 <span class="s1">    &quot;hashes&quot;: [</span>
 <span class="s1">      {</span>
 <span class="s1">        &quot;alg&quot;: &quot;HASHALGORITHM_SHA256&quot;,</span>
-<span class="s1">        &quot;hash&quot;: &quot;5839942d4f1e706fee33d0837617163f9368274a72b2b7e89d3b0877f390fc33&quot;</span>
+<span class="s1">        &quot;hash&quot;: &quot;&lt;file-hash&gt;&quot;</span>
 <span class="s1">      }</span>
 <span class="s1">    ],</span>
+<span class="s1">    &quot;uploadId&quot;: &quot;&lt;upload-id&gt;&quot;,</span>
 <span class="s1">    &quot;completedParts&quot;: [</span>
 <span class="s1">      {</span>
-<span class="s1">        &quot;etag&quot;: &quot;6bcf86bed8807b8e78f0fc6e0a53079d-1&quot;,</span>
+<span class="s1">        &quot;etag&quot;: &quot;&lt;etag-of-part-1&gt;&quot;,</span>
 <span class="s1">        &quot;part&quot;: &quot;1&quot;</span>
 <span class="s1">      },</span>
 <span class="s1">      {</span>
-<span class="s1">        &quot;etag&quot;: &quot;d41d8cd98f00b204e9800998ecf8427e-2&quot;,</span>
+<span class="s1">        &quot;etag&quot;: &quot;&lt;etag-of-part-2&gt;&quot;,</span>
 <span class="s1">        &quot;part&quot;: &quot;2&quot;</span>
 <span class="s1">      }, </span>
 <span class="s1">      { ... }</span>
@@ -1804,7 +1846,7 @@ curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</sp
 <span class="s1">  }&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-X<span class="w"> </span>PATCH<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/objects/<span class="o">{</span>object-id<span class="o">}</span>/finish
+<span class="w">     </span>-X<span class="w"> </span>PATCH<span class="w"> </span><span class="s2">&quot;https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/objects/{object-id}/finish&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -1847,18 +1889,18 @@ curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</sp
 <span class="w">    </span><span class="n">hashes</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
 <span class="w">        </span><span class="n">Hash</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">alg</span><span class="p">:</span><span class="w"> </span><span class="nc">Hashalgorithm</span><span class="p">::</span><span class="n">Sha256</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">hash</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5839942d4f1e706fee33d0837617163f9368274a72b2b7e89d3b0877f390fc33&quot;</span>
-<span class="w">                </span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">hash</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;file-hash&gt;&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="c1">// Other additional hashes can be added here</span>
 <span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="n">upload_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;upload-id&gt;&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">();</span>
 <span class="w">    </span><span class="n">completed_parts</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
 <span class="w">        </span><span class="n">CompletedPart</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">etag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6bcf86bed8807b8e78f0fc6e0a53079d-1&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">etag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;etag-of-part-1&gt;&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
 <span class="w">            </span><span class="n">part</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="n">CompletedPart</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">etag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;d41d8cd98f00b204e9800998ecf8427e-2&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">etag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;etag-of-part-2&gt;&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span>
 <span class="w">            </span><span class="n">part</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="n">CompletedPart</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w"> </span><span class="p">}</span>
@@ -1901,21 +1943,23 @@ curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</sp
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Create tonic/ArunaAPI to finish a multipart upload Object</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Create tonic/ArunaAPI to finish a multipart upload Object</span>
 <span class="n">request</span> <span class="o">=</span> <span class="n">FinishObjectStagingRequest</span><span class="p">(</span>
     <span class="n">object_id</span><span class="o">=</span><span class="s2">&quot;&lt;object-id&gt;&quot;</span><span class="p">,</span>
     <span class="n">content_len</span><span class="o">=</span><span class="mi">123456</span>
     <span class="n">hashes</span><span class="o">=</span><span class="p">[</span><span class="n">Hash</span><span class="p">(</span>
         <span class="n">alg</span><span class="o">=</span><span class="n">Hashalgorithm</span><span class="o">.</span><span class="n">HASHALGORITHM_SHA256</span><span class="p">,</span>
-        <span class="nb">hash</span><span class="o">=</span><span class="s2">&quot;5839942d4f1e706fee33d0837617163f9368274a72b2b7e89d3b0877f390fc33&quot;</span>
+        <span class="nb">hash</span><span class="o">=</span><span class="s2">&quot;&lt;file-hash&gt;&quot;</span>
     <span class="p">)],</span>
+    <span class="n">upload_id</span><span class="o">=</span><span class="s2">&quot;&lt;upload-id&gt;&quot;</span><span class="p">,</span>
     <span class="n">completed_parts</span><span class="o">=</span><span class="p">[</span>
         <span class="n">CompletedPart</span><span class="p">(</span>
-            <span class="n">etag</span><span class="o">=</span><span class="s2">&quot;6bcf86bed8807b8e78f0fc6e0a53079d-1&quot;</span><span class="p">,</span>
+            <span class="n">etag</span><span class="o">=</span><span class="s2">&quot;&lt;etag-of-part-1&gt;&quot;</span><span class="p">,</span>
             <span class="n">part</span><span class="o">=</span><span class="mi">1</span>
         <span class="p">),</span>
         <span class="n">CompletedPart</span><span class="p">(</span>
-            <span class="n">etag</span><span class="o">=</span><span class="s2">&quot;d41d8cd98f00b204e9800998ecf8427e-2&quot;</span><span class="p">,</span>
+            <span class="n">etag</span><span class="o">=</span><span class="s2">&quot;&lt;etag-of-part-1&gt;&quot;</span><span class="p">,</span>
             <span class="n">part</span><span class="o">=</span><span class="mi">2</span>
         <span class="p">),</span>
         <span class="n">CompletedPart</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
@@ -3317,7 +3361,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span
 <span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Native JSON request to delete an Object</span>
 curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">  {</span>
-<span class="s1">    &quot;withRevisions&quot;: &quot;false&quot;</span>
+<span class="s1">    &quot;withRevisions&quot;: false</span>
 <span class="s1">  }&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
