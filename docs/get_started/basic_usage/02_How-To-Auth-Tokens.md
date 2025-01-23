@@ -40,7 +40,7 @@ this token "inherits and enforces" the user's READ permission with every request
 
 **Resource**: 
 
-: The field `permission` is filled with a valid ULID of an existing Aruna resource and the corresponding permission level.
+: The field `resource_id` is filled with a valid ULID of an existing Aruna resource and then associated with a corresponding permission level.
 This token is valid for the specific resource and all the resources which are registered beneath it. 
 For example, these tokens can be used to give external users general but time limited access to a Project and all resources registered under it. However, these tokens should also not be distributed carelessly.
 
