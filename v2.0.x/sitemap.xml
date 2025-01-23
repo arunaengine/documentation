@@ -2,94 +2,94 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/generic_playbooks/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/generic_playbooks/citizen_science/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/generic_playbooks/genomic_data/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/generic_playbooks/sensor_data/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/00_index/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/01_Get-Storage-Access/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/02_How-To-Auth-Tokens/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/03_How-To-Licenses/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/04_How-To-Project/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/05_How-To-Collections/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/06_How-To-Datasets/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/07_How-To-Objects/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/08_How-To-Relations/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/09_How-To-EventNotification/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/10_How-To-ServerInfo/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/11_How-To-S3-Interface/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/12_How-To-Search/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/13_How-To-Hooks/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/14_How-To-ServiceAccount/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/get_started/basic_usage/15_How-To-Workspace/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/internal_data_structure/database_erd/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
     <url>
          <loc>https://docs.aruna-engine.org/v2.0.x/internal_data_structure/internal_data_structure/</loc>
-         <lastmod>2025-01-22</lastmod>
+         <lastmod>2025-01-23</lastmod>
     </url>
 </urlset>
