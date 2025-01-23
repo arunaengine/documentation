@@ -66,9 +66,9 @@ An API token can be created with different scopes and/or different permissions.
         "name": "<token-display-name>",
         "expiresAt": "2025-01-01T00:00:00.000Z"
       }' \
-         -H 'Authorization: Bearer <AUTH_TOKEN' \
+         -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/user/token
+         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/user/tokens
     ```
 
     ```bash linenums="1"
@@ -87,7 +87,7 @@ An API token can be created with different scopes and/or different permissions.
       }' \
          -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/user/token
+         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/user/tokens
     ```
 
     ```bash linenums="1"
@@ -106,7 +106,7 @@ An API token can be created with different scopes and/or different permissions.
       }' \
          -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/user/token
+         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/user/tokens
     ```
 
 === ":simple-rust: Rust"
@@ -420,23 +420,45 @@ the DataProxy as trusted with the user.
 === ":simple-curl: cURL"
 
     ```bash linenums="1"
+    # Native JSON request to explicitly create new S3 credentials for the specific endpoint
+    curl -H 'Authorization: Bearer <AUTH_TOKEN>' \
+         -H 'Content-Type: application/json' \
+         -X PATCH "https://<URL-to-Aruna-instance-API-endpoint>/v2/user/s3_credentials/{endpoint-id}"
+    ```
+
+    ```bash linenums="1"
     # Native JSON request to fetch S3 credentials for the specific endpoint
     curl -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X GET "https://<URL-to-Aruna-instance-API-endpoint>/v2/user/{user-id}/s3_credentials?endpointId={endpoint-id}"
+         -X GET "https://<URL-to-Aruna-instance-API-endpoint>/v2/user/s3_credentials/{endpoint-id}"
     ```
 
 === ":simple-rust: Rust"
 
     ```rust linenums="1"
-    // Create tonic/ArunaAPI request to fetch S3 credentials for the specific endpoint
-    let request = GetS3CredentialsUserRequest {
-        user_id: "<user-id>".to_string(),
+    // Create tonic/ArunaAPI request to explicitly create new S3 credentials for the specific endpoint
+    let request = CreateS3CredentialsUserTokenRequest {
         endpoint_id: "<endpoint-id>".to_string(),
     };
 
     // Get/Create S3 credentials to register user at DataProxy
-    let response = user_client.get_s3_credentials_user(request)
+    let response = user_client.create_s3_credentials_user_token(request)
+                              .await
+                              .unwrap()
+                              .into_inner();
+
+    // Do something with the response
+    println!("{:#?}", response);
+    ```
+
+    ```rust linenums="1"
+    // Create tonic/ArunaAPI request to fetch S3 credentials for the specific endpoint
+    let request = GetS3CredentialsUserTokenRequest {
+        endpoint_id: "<endpoint-id>".to_string(),
+    };
+
+    // Get/Create S3 credentials to register user at DataProxy
+    let response = user_client.get_s3_credentials_user_token(request)
                               .await
                               .unwrap()
                               .into_inner();
@@ -448,14 +470,26 @@ the DataProxy as trusted with the user.
 === ":simple-python: Python"
 
     ```python linenums="1"
-    # Create tonic/ArunaAPI request to fetch S3 credentials for the specific endpoint
-    request = GetS3CredentialsUserRequest(
-        user_id="<user-id>",
+    # Create tonic/ArunaAPI request to explicitly create new S3 credentials for the specific endpoint
+    request = CreateS3CredentialsUserTokenRequest(
         endpoint_id="<endpoint-id>"
     )
     
     # Send the request to the Aruna instance gRPC endpoint
-    response = client.user_client.GetS3CredentialsUser(request=request)
+    response = client.user_client.CreateS3CredentialsUserToken(request=request)
+    
+    # Do something with the response
+    print(f'{response}')
+    ```
+
+    ```python linenums="1"
+    # Create tonic/ArunaAPI request to fetch S3 credentials for the specific endpoint
+    request = GetS3CredentialsUserTokenRequest(
+        endpoint_id="<endpoint-id>"
+    )
+    
+    # Send the request to the Aruna instance gRPC endpoint
+    response = client.user_client.GetS3CredentialsUserToken(request=request)
     
     # Do something with the response
     print(f'{response}')
