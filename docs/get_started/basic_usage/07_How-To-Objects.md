@@ -1406,7 +1406,7 @@ Objects can also be deleted again according to the FAIR guidelines.
     # Native JSON request to delete an Object
     curl -d '
       {
-        "withRevisions": "false"
+        "withRevisions": false
       }' \
          -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
