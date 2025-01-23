@@ -293,19 +293,31 @@ For each uploaded part of the multipart upload you will receive a so called `ETa
 
     ```bash linenums="1"
     OBJECT_ID=<staging-object-id>
-    
+
     # Loop over all file parts, request an upload url, upload the data and display ETag with its part number
-    for i in "Dummy_Archive.tar.gz.aa",1 "Dummy_Archive.tar.gz.ab",2 "Dummy_Archive.tar.gz.ac",3 "Dummy_Archive.tar.gz.ad",4; 
+    for i in "Dummy_Archive.tar.gz.aa",1 "Dummy_Archive.tar.gz.ab",2 "Dummy_Archive.tar.gz.ac",3 "Dummy_Archive.tar.gz.ad",4;
       do IFS=","; # Split input at comma
       set -- $i;  # Convert the "tuple" into the param args $1 $2 ...
         PART_FILE=$1
         PART_NUM=$2
     
-        UPLOAD_URL=$(curl -s -H 'Authorization: Bearer <AUTH_TOKEN>' \
-                             -H 'Content-Type: application/json' \
-                             -X GET "https://<URL-to-Aruna-instance-API-endpoint>/v2/objects/${OBJECT_ID}/upload?multipart=true&partNumber=${PART_NUM}" | jq -r '.url')
-        ETAG=$(curl -X PUT -T ${PART_FILE} -i "${UPLOAD_URL}" | grep etag)
-    
+        # Fetch upload url for specific part
+        if [ -z $UPLOAD_ID ]
+        then
+            RESPONSE=$(curl -s -H 'Authorization: Bearer <AUTH_TOKEN>' \
+                            -H 'Content-Type: application/json' \
+                            -X GET "https://<URL-to-Aruna-instance-API-endpoint>/v2/objects/${OBJECT_ID}/upload?multipart=true&partNumber=${PART_NUM}")
+        else
+            RESPONSE=$(curl -s -H 'Authorization: Bearer <AUTH_TOKEN>' \
+                            -H 'Content-Type: application/json' \
+                            -X GET "https://<URL-to-Aruna-instance-API-endpoint>/v2/objects/${OBJECT_ID}/upload?multipart=true&partNumber=${PART_NUM}&uploadId=${UPLOAD_ID}")
+        fi
+        UPLOAD_URL=$(jq -r '.url' <<< "$RESPONSE")
+        UPLOAD_ID=$(jq -r '.uploadId' <<< "$RESPONSE")
+
+        # Upload file part to upload url and parse etag from response 
+        ETAG=$(curl -X PUT -T ${PART_FILE} -i "${UPLOAD_URL}" | grep etag | cut -f2 -d "-")
+
         echo -e "\nPart: ${PART_NUM}, ETag: ${ETAG}\n"
     done
     ```
@@ -471,16 +483,17 @@ On success the response will contain the finished Object analog to the response 
         "hashes": [
           {
             "alg": "HASHALGORITHM_SHA256",
-            "hash": "5839942d4f1e706fee33d0837617163f9368274a72b2b7e89d3b0877f390fc33"
+            "hash": "<file-hash>"
           }
         ],
+        "uploadId": "<upload-id>",
         "completedParts": [
           {
-            "etag": "6bcf86bed8807b8e78f0fc6e0a53079d-1",
+            "etag": "<etag-of-part-1>",
             "part": "1"
           },
           {
-            "etag": "d41d8cd98f00b204e9800998ecf8427e-2",
+            "etag": "<etag-of-part-2>",
             "part": "2"
           }, 
           { ... }
@@ -488,7 +501,7 @@ On success the response will contain the finished Object analog to the response 
       }' \
          -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X PATCH https://<URL-to-Aruna-instance-API-endpoint>/v2/objects/{object-id}/finish
+         -X PATCH "https://<URL-to-Aruna-instance-API-endpoint>/v2/objects/{object-id}/finish"
     ```
 
 === ":simple-rust: Rust"
