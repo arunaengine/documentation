@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/logo-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.a40c8224.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.d7758b05.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -105,7 +105,7 @@ This version is still in beta.
 </a>
 
             </div>
-            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
           </aside>
         
       </div>
@@ -370,6 +370,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     Home
+    
   </span>
   
 
@@ -418,6 +419,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     Getting Started
+    
   </span>
   
 
@@ -443,6 +445,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     Getting Started
+    
   </span>
   
 
@@ -464,6 +467,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     1 | Get Storage Access
+    
   </span>
   
 
@@ -485,6 +489,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     2 | Authorization/Tokens
+    
   </span>
   
 
@@ -506,6 +511,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     3 | Licenses
+    
   </span>
   
 
@@ -536,6 +542,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     4 | Projects
+    
   </span>
   
 
@@ -547,6 +554,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     4 | Projects
+    
   </span>
   
 
@@ -651,6 +659,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     5 | Collections
+    
   </span>
   
 
@@ -672,6 +681,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     6 | Datasets
+    
   </span>
   
 
@@ -693,6 +703,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     7 | Objects
+    
   </span>
   
 
@@ -714,6 +725,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     8 | Relations
+    
   </span>
   
 
@@ -735,6 +747,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     9 | Notifications
+    
   </span>
   
 
@@ -756,6 +769,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     10 | Server Info
+    
   </span>
   
 
@@ -777,6 +791,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     11 | S3 Interface
+    
   </span>
   
 
@@ -798,6 +813,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     12 | Search
+    
   </span>
   
 
@@ -819,6 +835,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     13 | Hooks
+    
   </span>
   
 
@@ -840,6 +857,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     14 | Service Accounts
+    
   </span>
   
 
@@ -861,6 +879,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     15 | Workspaces
+    
   </span>
   
 
@@ -907,6 +926,7 @@ This version is still in beta.
   
   <span class="md-ellipsis">
     Data Structure
+    
   </span>
   
 
@@ -934,6 +954,7 @@ This version is still in beta.
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -1000,7 +1021,7 @@ curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</sp
 <span class="s1">  }&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-X<span class="w"> </span>POST<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/project
+<span class="w">     </span>-X<span class="w"> </span>POST<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/projects
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -1107,7 +1128,7 @@ curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</sp
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Native JSON request to fetch information of a Project</span>
 curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-X<span class="w"> </span>GET<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/project/<span class="o">{</span>project-id<span class="o">}</span>
+<span class="w">     </span>-X<span class="w"> </span>GET<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/projects/<span class="o">{</span>project-id<span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -1809,7 +1830,7 @@ curl<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</sp
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Native JSON request to archive a Project</span>
 curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-X<span class="w"> </span>PATCH<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/project/<span class="o">{</span>project-id<span class="o">}</span>/archive
+<span class="w">     </span>-X<span class="w"> </span>PATCH<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/projects/<span class="o">{</span>project-id<span class="o">}</span>/archive
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -1883,7 +1904,7 @@ curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Auth
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Native JSON request to delete a project</span>
 curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Bearer &lt;AUTH_TOKEN&gt;&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/project/<span class="o">{</span>project-id<span class="o">}</span>
+<span class="w">     </span>-X<span class="w"> </span>DELETE<span class="w"> </span>https://&lt;URL-to-Aruna-instance-API-endpoint&gt;/v2/projects/<span class="o">{</span>project-id<span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -2037,7 +2058,7 @@ curl<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Auth
     <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.footer", "navigation.instant", "navigation.instant.progress", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
     
   <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
