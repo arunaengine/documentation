@@ -52,7 +52,7 @@ The project creator is automatically granted ADMIN permissions on the created Pr
       }' \
          -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/project
+         -X POST https://<URL-to-Aruna-instance-API-endpoint>/v2/projects
     ```
 
 === ":simple-rust: Rust"
@@ -123,7 +123,7 @@ API example for fetching info of an existing Project.
     # Native JSON request to fetch information of a Project
     curl -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X GET https://<URL-to-Aruna-instance-API-endpoint>/v2/project/{project-id}
+         -X GET https://<URL-to-Aruna-instance-API-endpoint>/v2/projects/{project-id}
     ```
 
 === ":simple-rust: Rust"
@@ -583,7 +583,7 @@ A Project can be archived which sets it and all the downstream relations to an i
     # Native JSON request to archive a Project
     curl -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X PATCH https://<URL-to-Aruna-instance-API-endpoint>/v2/project/{project-id}/archive
+         -X PATCH https://<URL-to-Aruna-instance-API-endpoint>/v2/projects/{project-id}/archive
     ```
 
 === ":simple-rust: Rust"
@@ -638,7 +638,7 @@ API examples of how to delete a Project.
     # Native JSON request to delete a project
     curl -H 'Authorization: Bearer <AUTH_TOKEN>' \
          -H 'Content-Type: application/json' \
-         -X DELETE https://<URL-to-Aruna-instance-API-endpoint>/v2/project/{project-id}
+         -X DELETE https://<URL-to-Aruna-instance-API-endpoint>/v2/projects/{project-id}
     ```
 
 === ":simple-rust: Rust"
