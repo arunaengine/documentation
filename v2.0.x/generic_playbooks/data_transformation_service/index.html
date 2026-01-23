@@ -1,0 +1,1063 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.aruna-engine.org/v2.0.x/generic_playbooks/data_transformation_service/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo-icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>ABCD2BioSchema Transformation Service - Aruna Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#abcd2bioschema-transformation-service" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+This version is still in beta.
+<a href="../../..">
+    <strong>Click here to go to the latest stable version.</strong>
+</a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Aruna Documentation" class="md-header__button md-logo" aria-label="Aruna Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-claim.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aruna Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ABCD2BioSchema Transformation Service
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/arunaengine/api" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    arunaengine/api
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../get_started/basic_usage/00_index/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../internal_data_structure/internal_data_structure/" class="md-tabs__link">
+          
+  
+  
+  Data Structure
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Aruna Documentation" class="md-nav__button md-logo" aria-label="Aruna Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-claim.png" alt="logo">
+
+    </a>
+    Aruna Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/arunaengine/api" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    arunaengine/api
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../.." class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../get_started/basic_usage/00_index/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../internal_data_structure/internal_data_structure/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structure
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="abcd2bioschema-transformation-service">ABCD2BioSchema Transformation Service</h1>
+<p>The ABCD2BioSchema service automatically converts biological collection metadata from the <a href="https://abcd.tdwg.org/">ABCD</a> 
+XML format to <a href="https://bioschemas.org/">BioSchema</a>-compliant JSON. It integrates with Aruna via webhooks and uses 
+the <a href="https://transformation.gfbio.org">GFBio Transformation API</a> for the conversion process.</p>
+<hr>
+<h2 id="purpose-of-this-service">Purpose of this Service</h2>
+<p>Researchers working with biological collection data often need to publish metadata in standardized formats.
+The ABCD (Access to Biological Collection Data) standard is widely used for specimen data, while BioSchema 
+provides semantic markup to improve discoverability on the web.</p>
+<p>This service combines the two: upload your ABCD XML to Aruna, add the 'ABCD' label, and the transformation happens 
+automatically. The resulting BioSchema JSON is stored alongside the original and is linked via provenance relationships.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[ABCD XML] --&gt;|Upload to Aruna| B[Webhook triggers]
+    B --&gt; C[ABCD2BioSchema Service]
+    C --&gt;|API call| D[GFBio Transformation]
+    D --&gt; C
+    C --&gt;|Upload result| E[BioSchema JSON]
+    E -.-&gt;|ORIGIN relation| A</code></pre>
+<hr>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Running <a href="https://docs.aruna-engine.org/latest/get_started/basic_usage/01_Get-Access/">Aruna instance</a></li>
+<li>Valid Aruna API token with hook permissions</li>
+<li>Docker and Docker Compose</li>
+</ul>
+<h3 id="deploy-the-service">Deploy the Service</h3>
+<ol>
+<li>
+<p><strong>Clone the repository:</strong>
+    </p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/arunaengine/ABCD2BioSchema.git
+<span class="nb">cd</span><span class="w"> </span>ABCD2BioSchema
+</code></pre></div><p></p>
+</li>
+<li>
+<p><strong>Configure environment:</strong>
+    </p><div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+<span class="c1"># Edit .env with your settings</span>
+</code></pre></div><p></p>
+</li>
+<li>
+<p><strong>Start the service:</strong>
+    </p><div class="highlight"><pre><span></span><code>./build-and-run.sh<span class="w"> </span>deploy
+</code></pre></div><p></p>
+</li>
+<li>
+<p><strong>Verify it's running:</strong>
+    </p><div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:5000/health
+<span class="c1"># {"status":"ok","message":"ABCD2BioSchema Service is running"}</span>
+</code></pre></div><p></p>
+</li>
+</ol>
+<h3 id="register-the-webhook">Register the Webhook</h3>
+<p>Register the service with your Aruna instance to receive transformation triggers. See the 
+<a href="https://docs.aruna-engine.org/latest/get_started/basic_usage/13_How-To-Hooks/">Hooks documentation</a> for details.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s1">'https://your-aruna-instance.com/v2/hooks'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+<span class="s1">    "name": "ABCD2BioSchema",</span>
+<span class="s1">    "trigger": {</span>
+<span class="s1">      "triggerType": "TRIGGER_TYPE_OBJECT_FINISHED",</span>
+<span class="s1">      "filters": [{</span>
+<span class="s1">        "keyValue": {</span>
+<span class="s1">          "key": "^ABCD$",</span>
+<span class="s1">          "value": ".*",</span>
+<span class="s1">          "variant": "KEY_VALUE_VARIANT_LABEL"</span>
+<span class="s1">        }</span>
+<span class="s1">      }]</span>
+<span class="s1">    },</span>
+<span class="s1">    "hook": {</span>
+<span class="s1">      "externalHook": {</span>
+<span class="s1">        "url": "http://your-service-host:5000/transform/url",</span>
+<span class="s1">        "method": "METHOD_POST"</span>
+<span class="s1">      }</span>
+<span class="s1">    },</span>
+<span class="s1">    "projectIds": ["your-project-id"],</span>
+<span class="s1">    "timeout": "1735689600000"</span>
+<span class="s1">  }'</span>
+</code></pre></div>
+<h3 id="trigger-a-transformation">Trigger a Transformation</h3>
+<p>Upload any ABCD XML file to Aruna and add the label <code>ABCD</code>. The service will then automatically:</p>
+<ol>
+<li>Download the XML via the presigned URL</li>
+<li>Send it to the GFBio API for transformation</li>
+<li>Upload the resulting JSON back to Aruna</li>
+<li>Create an <code>ORIGIN</code> relationship to link the result back to the source ABCD file</li>
+<li>Add the labels <code>BioSchema: true</code> and <code>TRANSFORMED_BY_GFBIO: success</code></li>
+</ol>
+<hr>
+<h2 id="configuration">Configuration</h2>
+<h3 id="environment-variables">Environment Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ARUNA_SERVER_ADDRESS</code></td>
+<td>Yes</td>
+<td>—</td>
+<td>Aruna gRPC endpoint (e.g., <code>https://api.aruna.example.com</code>)</td>
+</tr>
+<tr>
+<td><code>GFBIO_BASE_URL</code></td>
+<td>Yes</td>
+<td>—</td>
+<td>GFBio API base URL</td>
+</tr>
+<tr>
+<td><code>TEMP_DIR</code></td>
+<td>Yes</td>
+<td>—</td>
+<td>Directory for temporary files</td>
+</tr>
+<tr>
+<td><code>SERVER_HOST</code></td>
+<td>No</td>
+<td><code>0.0.0.0</code></td>
+<td>Bind address</td>
+</tr>
+<tr>
+<td><code>SERVICE_PORT</code></td>
+<td>No</td>
+<td><code>3000</code></td>
+<td>HTTP port</td>
+</tr>
+<tr>
+<td><code>TRANSFORMATION_ID</code></td>
+<td>No</td>
+<td><code>5</code></td>
+<td>GFBio transformation type (5 for ABCD to BioSchema transformation)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Example .env</p>
+<div class="highlight"><pre><span></span><code><span class="nv">ARUNA_SERVER_ADDRESS</span><span class="o">=</span>http://server:50051
+<span class="nv">GFBIO_BASE_URL</span><span class="o">=</span>https://transformation.gfbio.org/api
+<span class="nv">TEMP_DIR</span><span class="o">=</span>/app/temp
+<span class="nv">SERVICE_PORT</span><span class="o">=</span><span class="m">5000</span>
+<span class="nv">TRANSFORMATION_ID</span><span class="o">=</span><span class="m">5</span>
+</code></pre></div>
+</div>
+<h3 id="docker-compose-integration">Docker Compose Integration</h3>
+<p>The service integrates into an existing Aruna docker-compose setup. Add this to your <code>docker-compose.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">abcd2bioschema</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./ABCD2BioSchema</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abcd2bioschema</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"5000:5000"</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RUST_LOG=info</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GFBIO_BASE_URL=https://transformation.gfbio.org/api</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TEMP_DIR=/app/temp</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">abcd_temp:/app/temp</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">server</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_started</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"CMD"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"curl"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"-f"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"http://localhost:5000/health"</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">    </span><span class="nt">env_file</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">abcd_temp</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
+</code></pre></div>
+<hr>
+<h2 id="api-endpoints">API Endpoints</h2>
+<h3 id="health-check">Health Check</h3>
+<div class="highlight"><pre><span></span><code>GET /health
+</code></pre></div>
+<p>Returns service status. Use this for monitoring and load balancer health checks.</p>
+<details class="example">
+<summary>Response</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABCD2BioSchema Service is running"</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h3 id="transform-via-webhook">Transform via Webhook</h3>
+<div class="highlight"><pre><span></span><code>POST /transform/url
+</code></pre></div>
+<p>Primary endpoint called by Aruna webhooks. Receives the hook payload and processes the transformation asynchronously.</p>
+<details class="example">
+<summary>Request Payload (sent by Aruna)</summary>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"hook_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hook-abc-123"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook-secret"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"obj-xyz-789"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"specimen_data.xml"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"content_len"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048576</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"key_values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABCD"</span><span class="p">,</span><span class="w"> </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w"> </span><span class="nt">"variant"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"download"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.aruna.example.com/bucket/obj-xyz-789?..."</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temporary-api-token"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"access_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temp-access-key"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"secret_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"temp-secret-key"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"pubkey_serial"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h3 id="transform-via-upload">Transform via Upload</h3>
+<div class="highlight"><pre><span></span><code>POST /transform
+</code></pre></div>
+<p>Alternative endpoint for direct file uploads (without Aruna webhook). Useful for testing.</p>
+<p><strong>Query Parameters:</strong></p>
+<ul>
+<li><code>transformation_id</code> (optional): GFBio transformation type</li>
+<li><code>version_id</code> (optional): Transformation version</li>
+</ul>
+<p><strong>Body:</strong> Multipart form with field <code>xml_file</code></p>
+<details class="example">
+<summary>curl Example</summary>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:5000/transform?transformation_id=5"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-F<span class="w"> </span><span class="s2">"xml_file=@specimen.xml"</span>
+</code></pre></div>
+</details>
+<h3 id="job-status">Job Status</h3>
+<div class="highlight"><pre><span></span><code>GET /job/{job_id}
+</code></pre></div>
+<p>Query the status of a transformation job.</p>
+<hr>
+<h2 id="transformation-output">Transformation Output</h2>
+<p>When the service processes an ABCD file, it creates a new object in Aruna with these properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Original filename with <code>.json</code> extension</td>
+</tr>
+<tr>
+<td><strong>Title</strong></td>
+<td><code>{Original Title} BioSchema</code></td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Explains the transformation + original description</td>
+</tr>
+<tr>
+<td><strong>Labels</strong></td>
+<td><code>BioSchema: true</code>, <code>TRANSFORMED_BY_GFBIO: success</code>, plus inherited labels (except <code>ABCD</code>)</td>
+</tr>
+<tr>
+<td><strong>Relations</strong></td>
+<td><code>ORIGIN</code> → source ABCD file</td>
+</tr>
+<tr>
+<td><strong>Licenses</strong></td>
+<td>Inherited from source</td>
+</tr>
+<tr>
+<td><strong>Authors</strong></td>
+<td>Inherited from source</td>
+</tr>
+<tr>
+<td><strong>Parent</strong></td>
+<td>Same project/collection/dataset as source</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Provenance</p>
+<p>The <code>ORIGIN</code> relationship ensures full traceability. You can always navigate from the BioSchema JSON back to its ABCD XML source.</p>
+</div>
+<hr>
+<h2 id="how-webhooks-work">How Webhooks Work</h2>
+<p>The service receives events from Aruna via webhooks. Here's the communication flow:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant User
+    participant Aruna
+    participant Service as ABCD2BioSchema
+    participant GFBio
+
+    User-&gt;&gt;Aruna: Upload XML with label "ABCD"
+    Aruna-&gt;&gt;Aruna: Object finished, check hooks
+    Aruna-&gt;&gt;Service: POST /transform/url (hook payload)
+    Service--&gt;&gt;Aruna: HTTP 200
+    Service-&gt;&gt;Aruna: Download XML (presigned URL)
+    Aruna--&gt;&gt;Service: XML content
+    Service-&gt;&gt;GFBio: Transform request
+    GFBio--&gt;&gt;Service: JSON result
+    Service-&gt;&gt;Aruna: Upload JSON (S3 credentials)
+    Service-&gt;&gt;Aruna: Create object (gRPC)
+    Service-&gt;&gt;Aruna: Hook callback (success)
+    Aruna-&gt;&gt;Aruna: Add labels to source object</code></pre>
+<h3 id="the-hook-payload">The Hook Payload</h3>
+<p>Aruna sends everything the service needs in a single request:</p>
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Hook</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">hook_id</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w">           </span><span class="c1">// Unique invocation ID</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">secret</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w">            </span><span class="c1">// Verification token</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">object</span><span class="p">:</span><span class="w"> </span><span class="nc">Resource</span><span class="p">,</span><span class="w">          </span><span class="c1">// Full object metadata</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">download</span><span class="p">:</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w">  </span><span class="c1">// Presigned download URL</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">access_key</span><span class="p">:</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span><span class="c1">// Temporary S3 credentials</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">secret_key</span><span class="p">:</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">token</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w">             </span><span class="c1">// API token for callbacks</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">pubkey_serial</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="callbacks">Callbacks</h3>
+<p>After processing, the service notifies Aruna of the result via gRPC callback. This updates the source object's labels:</p>
+<p><strong>On success:</strong>
+</p><div class="highlight"><pre><span></span><code>Label: TRANSFORMED_BY_GFBIO = success
+</code></pre></div><p></p>
+<p><strong>On failure:</strong>
+</p><div class="highlight"><pre><span></span><code>Label: Error = {error message}
+</code></pre></div><p></p>
+<div class="admonition warning">
+<p class="admonition-title">Callbacks Are Required</p>
+<p>Always send a callback, even in the event of a failure. Without this, Aruna will be unable to update the object status, 
+meaning users won't know what happened.</p>
+</div>
+<hr>
+<h2 id="error-handling">Error Handling</h2>
+<p>The service handles errors at each stage and reports them back to Aruna.</p>
+<table>
+<thead>
+<tr>
+<th>Error Type</th>
+<th>Handling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Missing download URL</td>
+<td>Immediate error callback, return 400</td>
+</tr>
+<tr>
+<td>Download failure</td>
+<td>Error callback with details, return 502</td>
+</tr>
+<tr>
+<td>GFBio API failure</td>
+<td>Error callback, return 502</td>
+</tr>
+<tr>
+<td>Upload failure</td>
+<td>Error callback, return 500</td>
+</tr>
+<tr>
+<td>Callback failure</td>
+<td>Log error, return 500 (work was done)</td>
+</tr>
+</tbody>
+</table>
+<p>Errors appear as labels on the source object, making them visible to users in the Aruna UI.</p>
+<hr>
+<h2 id="development">Development</h2>
+<h3 id="project-structure">Project Structure</h3>
+<div class="highlight"><pre><span></span><code>ABCD2BioSchema/
+├── src/
+│   ├── main.rs        # Server setup, routing
+│   ├── service.rs     # HTTP endpoint handlers
+│   ├── webhook.rs     # Core transformation logic
+│   ├── models.rs      # Data structures
+│   └── job.rs         # Job tracking
+├── Dockerfile
+├── docker-compose.yml
+├── build-and-run.sh
+└── .env.example
+</code></pre></div>
+<h3 id="build-commands">Build Commands</h3>
+<p>The <code>build-and-run.sh</code> script provides convenient commands:</p>
+<div class="highlight"><pre><span></span><code>./build-and-run.sh<span class="w"> </span>build<span class="w">    </span><span class="c1"># Build Docker image</span>
+./build-and-run.sh<span class="w"> </span><span class="nb">test</span><span class="w">     </span><span class="c1"># Build and run tests</span>
+./build-and-run.sh<span class="w"> </span>deploy<span class="w">   </span><span class="c1"># Build, deploy, health check</span>
+./build-and-run.sh<span class="w"> </span>logs<span class="w">     </span><span class="c1"># Show service logs</span>
+./build-and-run.sh<span class="w"> </span>stop<span class="w">     </span><span class="c1"># Stop all services</span>
+./build-and-run.sh<span class="w"> </span>restart<span class="w">  </span><span class="c1"># Full restart</span>
+</code></pre></div>
+<h3 id="local-development">Local Development</h3>
+<p>For development without Docker:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install dependencies</span>
+cargo<span class="w"> </span>build
+
+<span class="c1"># Set environment</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ARUNA_SERVER_ADDRESS</span><span class="o">=</span>http://localhost:50051
+<span class="nb">export</span><span class="w"> </span><span class="nv">GFBIO_BASE_URL</span><span class="o">=</span>https://transformation.gfbio.org/api
+<span class="nb">export</span><span class="w"> </span><span class="nv">TEMP_DIR</span><span class="o">=</span>./temp
+<span class="nb">export</span><span class="w"> </span><span class="nv">SERVICE_PORT</span><span class="o">=</span><span class="m">5000</span>
+
+<span class="c1"># Run</span>
+cargo<span class="w"> </span>run
+</code></pre></div>
+<h3 id="testing">Testing</h3>
+<p><strong>Manual webhook test:</strong></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:5000/transform/url<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+<span class="s1">    "hook_id": "test-123",</span>
+<span class="s1">    "secret": "test-secret",</span>
+<span class="s1">    "object": {</span>
+<span class="s1">      "object": {</span>
+<span class="s1">        "id": "obj-456",</span>
+<span class="s1">        "name": "test.xml",</span>
+<span class="s1">        "content_len": 1024,</span>
+<span class="s1">        "key_values": [{"key": "ABCD", "value": "true", "variant": 1}]</span>
+<span class="s1">      }</span>
+<span class="s1">    },</span>
+<span class="s1">    "download": "https://example.com/test.xml",</span>
+<span class="s1">    "token": "test-token",</span>
+<span class="s1">    "pubkey_serial": 1</span>
+<span class="s1">  }'</span>
+</code></pre></div>
+<p><strong>Direct file upload test:</strong></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:5000/transform"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-F<span class="w"> </span><span class="s2">"xml_file=@test_specimen.xml"</span>
+</code></pre></div>
+<hr>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<details class="question">
+<summary>Webhook doesn't trigger</summary>
+<ul>
+<li>Verify the hook is registered: <code>GET /v2/hooks/owner/{userId}</code></li>
+<li>Check that the object has the <code>ABCD</code> label</li>
+<li>Ensure the service URL is reachable from Aruna's network</li>
+<li>Check service logs: <code>docker compose logs abcd2bioschema</code></li>
+</ul>
+</details>
+<details class="question">
+<summary>Transformation fails</summary>
+<ul>
+<li>Verify GFBio API is accessible: <code>curl https://transformation.gfbio.org/api</code></li>
+<li>Check if the XML is valid ABCD format</li>
+<li>Look for detailed errors in service logs</li>
+</ul>
+</details>
+<details class="question">
+<summary>Upload fails</summary>
+<ul>
+<li>S3 credentials from payload may have expired (rare)</li>
+<li>Check network connectivity between service and Aruna S3</li>
+<li>Verify the service has the <code>access_key</code> and <code>secret_key</code> in the payload</li>
+</ul>
+</details>
+<details class="question">
+<summary>Callback fails</summary>
+<ul>
+<li>Ensure the <code>token</code> in the payload has hook callback permissions</li>
+<li>Verify gRPC connectivity to <code>ARUNA_SERVER_ADDRESS</code></li>
+<li>Check that TLS is configured correctly for HTTPS endpoints</li>
+</ul>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.footer", "navigation.instant", "navigation.instant.progress", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.highlight", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
